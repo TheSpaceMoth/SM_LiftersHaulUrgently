@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation  Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Mech_Lifter"]/race/mechEnabledWorkTypes</xpath>
+		<match Class="PatchOperationConditional">
+			<xpath>/Defs/WorkGiverDef[defName = "HaulUrgently"]/canBeDoneByMechs/li[text()="HaulingUrgent"]</xpath>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName = "Mech_Lifter"]/race/mechEnabledWorkTypes</xpath>
+				<value>
+					<li>HaulingUrgent</li>		
+				</value>
+			</nomatch>
+		</match>
+	</Operation>
+	
+	<Operation  Class="PatchOperationConditional">
+		<xpath>/Defs/WorkGiverDef[defName = "HaulUrgently"]</xpath>
+		<match Class="PatchOperationConditional">
+			<xpath>/Defs/WorkGiverDef[defName = "HaulUrgently"]/canBeDoneByMechs</xpath>
+			<match Class="PatchOperationReplace">
+				<xpath>/Defs/WorkGiverDef[defName = "HaulUrgently"]/canBeDoneByMechs</xpath>
+				<value>
+					<canBeDoneByMechs>true</canBeDoneByMechs>		
+				</value>
+			</match>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/WorkGiverDef[defName = "HaulUrgently"]</xpath>
+				<value>
+					<canBeDoneByMechs>true</canBeDoneByMechs>		
+				</value>
+			</nomatch>
+		</match>
+	</Operation>
+</Patch>
